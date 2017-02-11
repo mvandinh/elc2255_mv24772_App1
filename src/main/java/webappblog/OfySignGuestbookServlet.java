@@ -31,8 +31,6 @@ public class OfySignGuestbookServlet extends HttpServlet {
 
         User user = userService.getCurrentUser();
 
- 
-
         // We have one entity group per Guestbook with all Greetings residing
 
         // in the same entity group as the Guestbook to which they belong.

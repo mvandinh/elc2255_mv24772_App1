@@ -1,7 +1,4 @@
-
 package webappblog;
-
- 
 
 import com.google.appengine.api.datastore.DatastoreService;
 
@@ -33,8 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
- 
-
 public class SignGuestbookServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -44,8 +39,6 @@ public class SignGuestbookServlet extends HttpServlet {
         UserService userService = UserServiceFactory.getUserService();
 
         User user = userService.getCurrentUser();
-
- 
 
         // We have one entity group per Guestbook with all Greetings residing
 
@@ -73,13 +66,9 @@ public class SignGuestbookServlet extends HttpServlet {
 
         greeting.setProperty("content", content);
 
- 
-
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
         datastore.put(greeting);
-
- 
 
         resp.sendRedirect("/guestbook.jsp?guestbookName=" + guestbookName);
 
