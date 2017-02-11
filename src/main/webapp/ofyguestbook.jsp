@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
-<%@ page import="greeting.Greeting" %>
+<%@ page import="webappblog.Greeting" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -48,14 +48,16 @@ List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).li
 Collections.sort(greetings); 
     if (greetings.isEmpty()) {
         %>
-        <p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
+        <p>WebAppBlog '${fn:escapeXml(guestbookName)}' has no messages.</p>
         <%
     } else {
         %>
-        <p>Messages in Guestbook '${fn:escapeXml(guestbookName)}'.</p>
+        <p>Messages in WebAppBlog '${fn:escapeXml(guestbookName)}'.</p>
         <%
         for (Greeting greeting : greetings) {
-            pageContext.setAttribute("greeting_content",
+        	pageContext.setAttribute("greeting_title",
+                    greeting.getTitle());
+        	pageContext.setAttribute("greeting_content",
                                      greeting.getContent());
             if (greeting.getUser() == null) {
                 %>
@@ -68,6 +70,10 @@ Collections.sort(greetings);
                 <p><b>${fn:escapeXml(greeting_user.nickname)}</b> wrote:</p>
                 <%
             }
+            
+            %>
+            <blockquote>${fn:escapeXml(greeting_title)}</blockquote>
+            <%
             %>
             <blockquote>${fn:escapeXml(greeting_content)}</blockquote>
             <%
@@ -76,7 +82,7 @@ Collections.sort(greetings);
 %>
     <form action="/ofysign" method="post">
       <div><textarea name="content" rows="3" cols="60"></textarea></div>
-      <div><input type="submit" value="Post Greeting" /></div>
+      <div><input type="submit" value="Post Message" /></div>
       <input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
     </form>
   </body>
