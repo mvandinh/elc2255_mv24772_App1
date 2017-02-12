@@ -55,7 +55,7 @@ Collections.sort(greetings);
         <p>Messages in WebAppBlog '${fn:escapeXml(guestbookName)}'.</p>
         <%
         for (Greeting greeting : greetings) {
-        	pageContext.setAttribute("greeting_title",
+        	pageContext.setAttribute("greeting_title",	// ADDED
                     greeting.getTitle());
         	pageContext.setAttribute("greeting_content",
                                      greeting.getContent());
@@ -72,7 +72,7 @@ Collections.sort(greetings);
             }
             
             %>
-            <blockquote>${fn:escapeXml(greeting_title)}</blockquote>
+            <blockquote>${fn:escapeXml(greeting_title)}</blockquote>	<%--ADDED--%>
             <%
             %>
             <blockquote>${fn:escapeXml(greeting_content)}</blockquote>

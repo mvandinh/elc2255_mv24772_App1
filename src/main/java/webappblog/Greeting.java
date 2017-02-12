@@ -17,19 +17,19 @@ public class Greeting implements Comparable<Greeting> {
     }
 	@Id Long id;
     User user;
-    String title;
+    String title;	// ADDED
     String content;
     Date date;
     public Greeting(User user, String title, String content) {
         this.user = user;
-        this.title = title;
+        this.title = title;		// ADDED
         this.content = content;
         date = new Date();
     }
     public User getUser() {
         return user;
     }
-    public String getTitle() {
+    public String getTitle() {		// ADDED
         return title;
     }
     public String getContent() {

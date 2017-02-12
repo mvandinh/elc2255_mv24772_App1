@@ -31,7 +31,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SignGuestbookServlet extends HttpServlet {
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
                 throws IOException {
         UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
@@ -42,11 +43,13 @@ public class SignGuestbookServlet extends HttpServlet {
         // Guestbook should be limited to ~1/second.
         String guestbookName = req.getParameter("guestbookName");
         Key guestbookKey = KeyFactory.createKey("Guestbook", guestbookName);
+        String title = req.getParameter("title");	// ADDED
         String content = req.getParameter("content");
         Date date = new Date();
         Entity greeting = new Entity("Greeting", guestbookKey);
         greeting.setProperty("user", user);
         greeting.setProperty("date", date);
+        greeting.setProperty("title", title); 	// ADDED
         greeting.setProperty("content", content);
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(greeting);
